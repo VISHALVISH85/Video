@@ -1,2 +1,32 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+function main_menu()
+    local child_btn = {
+        text = "Goto child menu";
+    }
+    while ui.loop() do
+        if ui.button(child_btn, layout.row(300, 50)).clicked then
+            return child_menu()
+        end
+    end
+end
+
+function child_menu()
+    local main_btn = {
+        text = "Goto back to main menu";
+    }
+    while ui.loop() do
+        if ui.button(main_btn, layout.row(300, 50)).clicked then
+            return main_menu()
+        end
+    end
+end
+
+ui = UI{
+    entry = main_menu;
+}
+
+function node.render()
+    layout.reset(20, 20, 20, 10)
+    ui.run() -- show current user interface
+end
